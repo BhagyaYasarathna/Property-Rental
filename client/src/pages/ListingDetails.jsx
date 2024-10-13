@@ -176,7 +176,7 @@ const ListingDetails = () => {
 
                     <div>
                         <h2>How long do you want to stay?</h2>
-                        <div className="date-range-calender">
+                        <div className="date-range-calendar">
                             <DateRange
                                 ranges={dateRange}
                                 onChange={handleSelect}
