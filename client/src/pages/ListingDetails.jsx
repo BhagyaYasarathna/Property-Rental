@@ -82,7 +82,7 @@ const ListingDetails = () => {
                     headers: {
                         "Content-Type": "application/json",
                     },
-                    body: JSON.stringify(bookingForm)
+                    body: JSON.stringify(bookingForm),
                 }
             );
 
@@ -129,25 +129,11 @@ const ListingDetails = () => {
                 <hr />
 
                 <div className="profile">
-                    {/* <img
+                    <img
                         src={`http://localhost:3001/${listing.creator.profileImagePath.replace(
                             "public",
                             ""
                         )}`}
-                    /> */}
-
-                    <img
-                        src={
-                            listing?.creator?.profileImagePath
-                                ? `http://localhost:3001/${listing.creator.profileImagePath.replace(
-                                      "public",
-                                      ""
-                                  )}`
-                                : "/path-to-placeholder-image.jpg" // Provide a placeholder in case the profile image is missing
-                        }
-                        alt={`${
-                            listing?.creator?.firstName || "Host"
-                        }'s profile`}
                     />
 
                     <h3>
