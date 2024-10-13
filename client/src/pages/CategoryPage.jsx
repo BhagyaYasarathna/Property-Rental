@@ -1,18 +1,48 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "../styles/List.scss";
-import { useSelector } from "react-redux";
 import Navbar from "../components/Navbar";
+import { useParams } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { setListing } from "../redux/state";
+import Loader from "../components/Loader";
 import ListingCard from "../components/ListingCard";
 
-const WishList = () => {
-    const wishList = useSelector((state) => state.user.wishList);
+const CategoryPage = () => {
+    const [loading, setLoading] = useState(true);
+    const { category } = useParams();
 
-    return (
+    const dispatch = useDispatch();
+
+    const listings = useSelector((state) => state.listings);
+
+    const getFeedListings = async () => {
+        try {
+            const response = await fetch(
+                `http://localhost:3001/properties?category=${category}`,
+
+                { method: "GET" }
+            );
+
+            const data = await response.json();
+            dispatch(setListing({ listings: data }));
+            setLoading(false);
+        } catch (err) {
+            console.log("Fetch Listings Failed", err.message);
+        }
+    };
+
+    useEffect(() => {
+        getFeedListings();
+    }, [category]);
+
+    return loading ? (
+        <Loader />
+    ) : (
         <>
             <Navbar />
-            <h1 className="title-list"> Your Wish List</h1>
+            <h1 className="title-list">{category} Listings</h1>
             <div className="list">
-                {wishList?.map(
+                {listings?.map(
                     ({
                         _id,
                         creator,
@@ -44,4 +74,4 @@ const WishList = () => {
     );
 };
 
-export default WishList;
+export default CategoryPage;
