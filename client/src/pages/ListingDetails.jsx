@@ -10,6 +10,7 @@ import { DateRange } from "react-date-range";
 
 import Loader from "../components/Loader";
 import { useSelector } from "react-redux";
+import Footer from "../components/Footer";
 
 const ListingDetails = () => {
     // When you fetch data, you must have this loading. Otherwise you'll get an error
@@ -210,6 +211,7 @@ const ListingDetails = () => {
                     </div>
                 </div>
             </div>
+            <Footer />
         </>
     );
 };
